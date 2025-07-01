@@ -13,7 +13,6 @@ function transformStateWithClones(state, actions) {
   for (const taskToDo of actions) {
     if (taskToDo.type === 'addProperties') {
       modifyState = { ...modifyState, ...taskToDo.extraData };
-      arrayOfState.push({ ...modifyState });
     }
 
     if (taskToDo.type === 'removeProperties') {
@@ -22,14 +21,13 @@ function transformStateWithClones(state, actions) {
       for (const key of taskToDo.keysToRemove) {
         delete modifyState[key];
       }
-      arrayOfState.push({ ...modifyState });
     }
 
     if (taskToDo.type === 'clear') {
       modifyState = {};
-
-      arrayOfState.push({ ...modifyState });
     }
+
+    arrayOfState.push({ ...modifyState });
   }
 
   return arrayOfState;
